@@ -1,0 +1,17 @@
+<%= button_tag 'Payment Request', id: 'payment-request-component-button', class: 'payment-request-component-button',
+  type: 'button' %>
+
+<div class="payment-request-component-fields">
+  <div class="clear"></div>
+  <input disabled type="hidden" id="payment-request-component-nonce">
+</div>
+
+<script>
+  if (window.PaymentRequest) {
+    var paymentRequestComponentButtonElement = document.getElementById('payment-request-component-button');
+    var button = new SolidusBraintree.createPaymentRequestComponent(paymentRequestComponentButtonElement);
+    button.initialize();
+  } else {
+    console.log("PaymentRequest not supported by the user agent")
+  }
+</script>
