@@ -7,6 +7,8 @@
 <% end %>
 
 <% if current_store.braintree_configuration.credit_card? %>
+  <%= render "spree/shared/payment_request_component_button" %>
+
   <fieldset class="braintree-hosted-fields" data-braintree-hosted-fields data-id="<%= id %>">
     <%= render "spree/shared/braintree_hosted_fields", payment_method: payment_method %>
   </fieldset>

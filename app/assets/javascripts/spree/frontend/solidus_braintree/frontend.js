@@ -13,3 +13,4 @@
 //= require spree/frontend/solidus_braintree/paypal_messaging
 //= require spree/frontend/solidus_braintree/apple_pay_button
 //= require spree/frontend/solidus_braintree/venmo_button
+//= require spree/frontend/solidus_braintree/payment_request_component

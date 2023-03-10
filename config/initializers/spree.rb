@@ -72,7 +72,6 @@ Spree::Api::Config.configure do |config|
   config.requires_authentication = true
 end
 
-
 # Rules for avoiding to store the current path into session for redirects
 # When at least one rule is matched, the request path will not be stored
 # in session.
@@ -80,3 +79,17 @@ end
 # the class name:
 #
 # Spree::UserLastUrlStorer.rules << 'Spree::UserLastUrlStorer::Rules::AuthenticationRule'
+
+Rails.application.config.to_prepare do
+  Spree::Config.static_model_preferences.add(
+    SolidusBraintree::Gateway,
+    'braintree_credentials', {
+      environment: Rails.env.production? ? 'production' : 'sandbox',
+      merchant_id: ENV['BRAINTREE_MERCHANT_ID'],
+      public_key: ENV['BRAINTREE_PUBLIC_KEY'],
+      private_key: ENV['BRAINTREE_PRIVATE_KEY'],
+      paypal_flow: 'vault', # 'checkout' is accepted too
+      use_data_collector: true # Fingerprint the user's browser when using Paypal
+    }
+  )
+end
